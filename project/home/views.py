@@ -19,19 +19,19 @@ navigation_bar = [
 @home_blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', navigation_bar=navigation_bar,name=current_user.username)
+    return render_template('dashboard.html', navigation_bar=navigation_bar,current_user=current_user)
 
 
 @home_blueprint.route('/userInfo')
 @login_required
 def server_info():
-    return render_template('user.html', navigation_bar=navigation_bar,name=current_user.username)
+    return render_template('user.html', navigation_bar=navigation_bar,current_user=current_user)
 
 
 @home_blueprint.route('/table')
 @login_required
 def table_info():
-    return render_template('table.html', navigation_bar=navigation_bar,name=current_user.username)
+    return render_template('table.html', navigation_bar=navigation_bar,current_user=current_user)
 
 @home_blueprint.route('/icons')
 def icons():

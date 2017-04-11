@@ -4,12 +4,18 @@
 <html lang="en">
 {% block head %}
     {{ super() }}
+    <script type="text/javascript">
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
 {% endblock %}
+
 
 <body>
 
 	<div class="wrapper">
-
 	    {% block sidebar %}
             {{ super() }}
         {% endblock %}

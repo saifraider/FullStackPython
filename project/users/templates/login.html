@@ -4,7 +4,15 @@
 {% block title %}
 Login
 {% endblock %}
-
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript">
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+{% endblock %}
 {% block styles %}
 {{super()}}
  <link rel="stylesheet" href="{{url_for('static', filename='css/signin.css')}}">
