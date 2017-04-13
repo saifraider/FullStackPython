@@ -8,8 +8,7 @@ from project.users.login_form import LoginForm
 from project import db
 from project.models import User
 
-
-user_blueprint = Blueprint('user', __name__, template_folder='templates',static_folder='static')
+user_blueprint = Blueprint('user', __name__, template_folder='templates', static_folder='static')
 
 
 @user_blueprint.route('/')
@@ -41,7 +40,7 @@ def signup():
 
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(email=form.email.data,username=form.username.data, password=hashed_password)
+        new_user = User(email=form.email.data, username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
 

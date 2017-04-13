@@ -1,12 +1,12 @@
 from project import db
 
 # from project import bcrypt
-
+import json
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class User(db.Model):
+class User(db.Model, object):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,7 +32,9 @@ class User(db.Model):
         return unicode(self.id)
 
     def __repr__(self):
-        return '<name - {}>'.format(self.name)
+        return '<name - {}>'.format(self.username)
+
+
 
 
 '''

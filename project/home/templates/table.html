@@ -4,6 +4,10 @@
 <html lang="en">
 {% block head %}
     {{ super() }}
+    <script type="text/javascript">
+
+
+    </script>
 {% endblock %}
 
 <body>
@@ -21,64 +25,17 @@
 			{% endblock %}
 
 			{% block content %}
+
+
+
 			<div class="content">
+
 	            <div class="container-fluid">
+                    <button id="showUsers" type="button" class="btn btn-success">Show users</button>
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Simple Table</h4>
-	                                <p class="category">Here is a subtitle for this table</p>
-	                            </div>
-	                            <div class="card-content table-responsive">
-	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>Name</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
-											<th>Salary</th>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-												<td class="text-primary">$36,738</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-												<td class="text-primary">$56,142</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-												<td class="text-primary">$38,735</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-												<td class="text-primary">$63,542</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
-												<td class="text-primary">$78,615</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
 
-	                            </div>
 	                        </div>
 	                    </div>
 
@@ -161,5 +118,47 @@
 	<!--   Core JS Files   -->
     {% block include_scripts %}
         {{ super() }}
+
+        <script type="text/javascript">
+            $(function() {
+                $('#showUsers').click(function() {
+                    $.ajax({
+                        url:"/ajax",
+                        dataType:"json",
+                        type:"GET",
+                        success:function(data){
+                            var users = data;
+
+                                var output = "";
+                                output = output + "" +
+                                        "<div class='card-header' data-background-color='purple'>"+
+                                            "<h4 class='title'>Simple Table</h4>"+
+                                            "<p class='category'>Users</p>"+
+                                        "</div>"+
+	                                    "<div class='card-content table-responsive'>"+
+	                                        "<table class='table'>"+
+	                                            "<thead class='text-primary'><th>ID</th><th>Name</th><th>email</th><th>email</th></thead>"+
+	                                            "<tbody>";
+                                        for(var i=0;i<data.length;i++) {
+                                            output +=
+                                                    "<tr>" +
+                                                        "<td>" + data[i].id + "</td>" +
+                                                        "<td>" + data[i].username + "</td>" +
+                                                        "<td>" + data[i].email + "</td>" +
+                                                        "<td class='text-primary'>" + data[i].email + "</td>" +
+                                                    "</tr>";
+                                        }
+	                                    output+="</tbody>"+
+	                                        "</table>"+
+	                                    "</div>";
+
+                            $(".card").html(output);
+                                //alert(data[i].id+","+data[i].username+","+data[i].email);
+
+                        }
+                    });
+                });
+            });
+        </script>
     {% endblock %}
 </html>
