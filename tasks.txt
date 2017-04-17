@@ -1,0 +1,13 @@
+session closeout after closing browser - completed (flask handles it automatically)
+session closeout after period of inactivity
+check d3.js with flask - completed
+check ajax with flask - completed
+check jquery with flask - completed
+redirect in flask from html page --> window.location.href = ?, using {{ }}
+learn d3.js
+learn sql-alchemy
+check schedulers in flask
+implement modals to make reservation and cancel reservation
+think of a method to call view cluster, reserve cluster, cancel reservation
+implement drop down in side nav bar
+think on how to implement admin module
