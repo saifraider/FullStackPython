@@ -655,7 +655,7 @@ h2.title {
 }
 .main-panel > .content {
   margin-top: 70px;
-  padding: 30px 15px;
+  padding: 0px 15px;
   min-height: calc(100% - 123px);
 }
 .main-panel > .footer {
@@ -3637,15 +3637,17 @@ footer .btn {
   color: #999999;
 }
 .card .card-footer .stats {
-  line-height: 22px;
-  color: #999999;
+  line-height: 25px;
+  color: #000000;
   font-size: 12px;
 }
-.card .card-footer .stats .material-icons {
-  position: relative;
-  top: 4px;
-  font-size: 16px;
+
+.card .card-footer .stats a {
+
+  font-size: 12px;
 }
+
+
 .card .card-footer h6 {
   color: #999999;
 }
@@ -3721,9 +3723,9 @@ footer .btn {
 }
 .card-stats .card-header i {
   font-size: 36px;
-  line-height: 56px;
-  width: 56px;
-  height: 56px;
+  line-height: 36px;
+  width: 36px;
+  height: 36px;
 }
 .card-stats .card-content {
   text-align: right;
