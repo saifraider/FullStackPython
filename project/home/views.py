@@ -1,9 +1,9 @@
-from flask import render_template, Blueprint, \
-    request, flash, redirect, url_for  # pragma: no cover
-from flask.ext.login import login_required, current_user  # pragma: no cover
-from project.models import User
 import json
-from project.home.message_form import MessageForm  # pragma: no cover
+
+from flask import render_template, Blueprint  # pragma: no cover
+from flask.ext.login import login_required, current_user  # pragma: no cover
+
+from project.models.users import User
 
 # from project import db   # pragma: no cover
 # from project.models import BlogPost   # pragma: no cover

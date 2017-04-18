@@ -1,12 +1,12 @@
-from flask import flash, redirect, render_template, request, \
-    url_for, Blueprint  # pragma: no cover
+from flask import redirect, render_template, url_for, Blueprint  # pragma: no cover
 from flask.ext.login import login_user, \
     login_required, logout_user  # pragma: no cover
 from werkzeug.security import generate_password_hash, check_password_hash
-from project.users.register_form import RegisterForm
-from project.users.login_form import LoginForm
+
 from project import db
-from project.models import User
+from project.models.users import User
+from project.users.login_form import LoginForm
+from project.users.register_form import RegisterForm
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates', static_folder='static')
 

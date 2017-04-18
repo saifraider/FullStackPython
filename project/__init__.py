@@ -1,30 +1,47 @@
-from flask import Flask, redirect, url_for
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.bcrypt import Bcrypt
+from flask import Flask
 from flask.ext.login import LoginManager
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from config import secret
+from config import config
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = secret['session_secret_key']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:' + secret['postgres_password'] + '@localhost/Flask'
-Bootstrap(app)
-db = SQLAlchemy(app)
+
+bootstrap = Bootstrap()
+db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.init_app(app)
-
-from project.users.views import user_blueprint
-from project.home.views import home_blueprint
-
-# register our blueprints
-app.register_blueprint(user_blueprint)
-app.register_blueprint(home_blueprint)
-
-from models import User
-
-login_manager.login_view = '/login'
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.filter(User.id == int(user_id)).first()
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+
+    bootstrap.init_app(app)
+    db.init_app(app)
+
+    login_manager.init_app(app)
+    login_manager.login_view = '/login'
+
+    from project.users.views import user_blueprint
+    app.register_blueprint(user_blueprint)
+
+    from project.home.views import home_blueprint
+    app.register_blueprint(home_blueprint)
+
+    from project.models.users import User
+    with app.app_context():
+        # Extensions like Flask-SQLAlchemy now know what the "current" app
+        # is while within this block. Therefore, you can now run........
+        db.create_all()
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.filter(User.id == int(user_id)).first()
+
+    return app
+
+
+# app.config['SECRET_KEY'] =
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:' + secret['postgres_password'] + '@localhost/Flask'
+# Bootstrap(app)
+# db = SQLAlchemy(app)
+
