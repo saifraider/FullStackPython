@@ -40,8 +40,4 @@ def create_app(config_name):
     return app
 
 
-# app.config['SECRET_KEY'] =
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:' + secret['postgres_password'] + '@localhost/Flask'
-# Bootstrap(app)
-# db = SQLAlchemy(app)
 
