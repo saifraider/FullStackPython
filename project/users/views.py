@@ -39,6 +39,7 @@ def signup():
     form = RegisterForm()
 
     if form.validate_on_submit():
+        #check if user with same id exists
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(email=form.email.data, username=form.username.data, password=hashed_password)
         db.session.add(new_user)

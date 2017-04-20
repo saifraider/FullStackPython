@@ -2,10 +2,12 @@ import json
 
 from flask import render_template, Blueprint  # pragma: no cover
 from flask.ext.login import login_required, current_user  # pragma: no cover
-
+from flask import request
+from datatables import ColumnDT, DataTables
 from project.models.users import User
+from flask import jsonify
+from project import db  # pragma: no cover
 
-# from project import db   # pragma: no cover
 # from project.models import BlogPost   # pragma: no cover
 
 home_blueprint = Blueprint('home', __name__, template_folder='templates', static_folder='static')
@@ -52,3 +54,28 @@ def ajax():
         list_of_users.append(data)
     print(json.dumps(list_of_users))
     return json.dumps(list_of_users)
+
+
+@home_blueprint.route('/datatable')
+def data():
+    """Return server side data."""
+    # defining columns
+    columns = [
+        ColumnDT(User.id),
+        ColumnDT(User.username),
+        ColumnDT(User.email)
+
+    ]
+
+    # defining the initial query depending on your purpose
+    query = User.query.with_entities(User.id, User.username, User.email)
+
+    print(query)
+    # GET parameters
+    params = request.args.to_dict()
+
+    # instantiating a DataTable for the query and table needed
+    rowTable = DataTables(params, query, columns)
+
+    # returns what is needed by DataTable
+    return jsonify(rowTable.output_result())
