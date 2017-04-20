@@ -18,5 +18,6 @@ cant set environment variables in mac - completed
 learn callback functions
 learn about flask admin
 handle exceptions when user sign up fails
+learn about flask migrate
 
 
