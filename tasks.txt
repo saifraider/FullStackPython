@@ -1,23 +1,27 @@
-implement side nav bar - completed
-session closeout after closing browser - completed (flask handles it automatically)
+-->implement side nav bar - completed
+-->session closeout after closing browser - completed (flask handles it automatically)
 session closeout after period of inactivity
-check d3.js with flask - completed
-check ajax with flask - completed
-check jquery with flask - completed
-redirect in flask from html page --> window.location.href = ?, using {{ }} - completed
+-->check d3.js with flask - completed
+-->check ajax with flask - completed
+-->check jquery with flask - completed
+-->redirect in flask from html page --> window.location.href = ?, using {{ }} - completed
 learn d3.js
 learn sql-alchemy
 check schedulers in flask
 implement modals to make reservation and cancel reservation
 think of a method to call view cluster, reserve cluster, cancel reservation
 implement drop down in side nav bar - not a priority
-think on how to implement admin module
-implement datatables in flask - high priority
-implement pagination in flask
-cant set environment variables in mac - completed
+-->think on how to implement admin module
+-->implement datatables in flask - high priority - completed
+implement control buttons i.e crud in datatable
+implement filter in datatable
+-->implement pagination in flask
+-->cant set environment variables in mac - completed
 learn callback functions
 learn about flask admin
-handle exceptions when user sign up fails
+handle database exceptions
 learn about flask migrate
+-->learn to manage blueprints - completed
+learn to upload data while sending email
 
 

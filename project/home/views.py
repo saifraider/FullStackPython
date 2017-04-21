@@ -6,8 +6,7 @@ from flask import request
 from datatables import ColumnDT, DataTables
 from project.models.users import User
 from flask import jsonify
-from project import db  # pragma: no cover
-
+from project import db   # pragma: no cover
 # from project.models import BlogPost   # pragma: no cover
 
 home_blueprint = Blueprint('home', __name__, template_folder='templates', static_folder='static')
@@ -54,7 +53,6 @@ def ajax():
         list_of_users.append(data)
     print(json.dumps(list_of_users))
     return json.dumps(list_of_users)
-
 
 @home_blueprint.route('/datatable')
 def data():

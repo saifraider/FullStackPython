@@ -50,17 +50,34 @@
 
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav" id = "myTab">
-
+                <!--
                     {% for href, id, caption, icon, class in navigation_bar %}
                         <li{% if id == active_page %} class="active"{% endif %}>
 
                             {% if id == "icons" %}
-                                <a href="{{ href|e }}"><i class="{{ class.replace("_"," ") }}"></i><p>{{ caption|e }}</p></a>
+                                <a href="{{ href }}"><i class="{{ class.replace("_"," ") }}"></i><p>{{ caption|e }}</p></a>
                             {% else %}
-                                <a href="{{ href|e }}"><i class={{ class}}>{{ icon }}</i><p>{{ caption|e }}</p></a>
+                                <a href="{{ href}}"><i class={{ class}}>{{ icon }}</i><p>{{ caption|e }}</p></a>
                             {% endif %}
                         </li>
                     {% endfor %}
+                -->
+                        <li {% if 'dashboard' == active_page %} class="active" {% endif %}>
+                            <a href="{{ url_for('home.dashboard')}}"><i class="material-icons">home</i><p>Home</p></a>
+                        </li>
+
+                        <li {% if 'user' == active_page %} class="active" {% endif %}>
+                            <a href="{{ url_for('home.server_info')}}"><i class="material-icons">person</i><p>User Profile</p></a>
+                        </li>
+
+                        <li {% if 'table' == active_page %} class="active" {% endif %}>
+                            <a href="{{url_for('home.table_info') }}"><i class="material-icons">content_paste</i><p>Table</p></a>
+                        </li>
+
+                        <li {% if 'icons' == active_page %} class="active" {% endif %}>
+                            <a href="{{ url_for('home.icons')}}"><i class="fa fa-server"></i><p>Server</p></a>
+                        </li>
+
                     <!--
 	                <li class="active">
 	                    <a href="/">
@@ -115,12 +132,7 @@
 			<nav class="navbar navbar-transparent navbar-absolute">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
+
 						<a class="navbar-brand" href="#"><font size="6">Welcome, {{ current_user.username }}</font></a>
 					</div>
 					<div class="collapse navbar-collapse">
@@ -144,8 +156,8 @@
 									<li><a href="#">Another Notification</a></li>
 									<li><a href="#">Another One</a></li>
 								</ul>
-							</li>
-							<li>-->
+							</li>-->
+							<li>
 								<a href="/logout" class="navbar-brand">
 	 							   <!--<i class="material-icons">person</i>-->
                                     <font size="4">LOGOUT</font>

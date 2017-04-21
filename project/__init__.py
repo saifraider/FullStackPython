@@ -25,7 +25,7 @@ def create_app(config_name):
     app.register_blueprint(user_blueprint)
 
     from project.home.views import home_blueprint
-    app.register_blueprint(home_blueprint)
+    app.register_blueprint(home_blueprint,url_prefix='/home')
 
     from project.models.users import User
     with app.app_context():

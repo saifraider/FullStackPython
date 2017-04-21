@@ -78,7 +78,7 @@
                     var table = $('#dt_110x').DataTable({
                         "processing": true,
                         "serverSide": true,
-                        "ajax": "/datatable"
+                        "ajax": "{{ url_for('home.data') }}"
                   });
                 });
 
@@ -88,7 +88,7 @@
             $(function() {
                 $('#showUsers').click(function() {
                     $.ajax({
-                        url:"/ajax",
+                        url:"{{ url_for('home.ajax') }}",
                         dataType:"json",
                         type:"GET",
                         success:function(data){
