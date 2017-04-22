@@ -11,11 +11,15 @@ check schedulers in flask
 implement modals to make reservation and cancel reservation
 think of a method to call view cluster, reserve cluster, cancel reservation
 implement drop down in side nav bar - not a priority
--->think on how to implement admin module
+-->think on how to implement admin module - completed
 -->implement datatables in flask - high priority - completed
-implement control buttons i.e crud in datatable
-implement filter in datatable
--->implement pagination in flask
+-->implement control buttons i.e crud in datatable - completed
+-->implement delete in datatable - completed
+implement add in datatable
+implement edit in datatable
+-->implement filter in datatable - completed
+implement radiobutton filter in datatable
+-->implement pagination in flask - completed
 -->cant set environment variables in mac - completed
 learn callback functions
 learn about flask admin

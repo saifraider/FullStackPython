@@ -4,7 +4,8 @@
 <html lang="en">
 {% block head %}
     {{ super() }}
-    <link href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.css" rel="stylesheet">
+    <!--<link href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.dataTables.css')}}">
     <script type="text/javascript">
 
 
@@ -59,7 +60,19 @@
 	                    </div>
 
 	                    <div class="col-md-12">
-	                        <table id="dt_110x" class="display" cellspacing="0" width="100%">
+                            <table border="0" cellspacing="5" cellpadding="5">
+                                <tbody>
+                                    <tr>
+                                        <td>Minimum Id:</td>
+                                        <td><input type="text" id="min" name="min"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maximum Id:</td>
+                                        <td><input type="text" id="max" name="max"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+	                        <table id="example" class="display" cellspacing="0" width="100%">
                                 <thead>
                                   <tr>
                                     <th>Id</th>
@@ -89,11 +102,11 @@
         {{ super() }}
 
         <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-
+        <!--<script type="text/javascript" src="{{url_for('static', filename='js/jquery.dataTables.min.js')}}"></script>-->
         <script type="text/javascript">
 
                 $(document).ready(function(){
-                    var table = $('#dt_110x').DataTable({
+                    var table = $('#example').DataTable({
                         "processing": true,
                         "serverSide": true,
                         "ajax": "{{ url_for('home.data') }}",
@@ -105,15 +118,55 @@
                                 data: null,
                                 orderable: false,
                                 className: "center",
-                                defaultContent: '<a href="#myModal" data-toggle="modal">Edit</a> / <a href="#myModal" data-toggle="modal" >Delete</a>'
+                                defaultContent: '<a class="edit" href="#myModal" data-toggle="modal">Edit</a> / <a href="" class="delete" >Delete</a>'
                             }
                         ]
-                  });
+                    });
+
+                    $('#example').on('click', 'a.delete', function (e) {
+                        e.preventDefault();
+                        if(!confirm("Are you sure to delete this user?"))
+                            return false;
+                        var data = table.row( $(this).parents('tr') ).data();
+                        $.ajax({
+                            url:"{{ url_for('home.delete') }}",
+                            dataType:"json",
+                            type:"GET",
+                            data:{id:data[0]},
+                            success:function(response){
+                                if(response.res=="True"){
+                                    alert('User with ID '+data[0]+" is deleted!" );
+                                    $(this).closest('tr').remove();
+                                    table.ajax.reload();
+                                }
+
+                            }
+                        });
+                    });
+
+                    $('#min, #max').keyup( function() {
+
+                        var min = parseInt( $('#min').val());
+                        var max = parseInt( $('#max').val());
+                        if(isNaN(min)&&isNaN(max)){
+                            table.ajax.url("{{ url_for('home.data') }}").load();
+                            return false;
+                        }
+                        if(isNaN(min)) return false;
+                        if(isNaN(max)) return false;
+                        if(min>max) return false;
+                        if(max<min) return false;
+                        //alert("{{ url_for('home.filter_id') }}");
+                        table.ajax.url("{{ url_for('home.filter_id') }}?min="+min+"&max="+max).load();
+
+                    });
+
                 });
 
         </script>
 
         <script type="text/javascript">
+
             $(function() {
                 $('#showUsers').click(function() {
                     $.ajax({
@@ -152,6 +205,7 @@
                         }
                     });
                 });
+
             });
         </script>
     {% endblock %}
