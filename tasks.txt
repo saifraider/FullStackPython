@@ -17,6 +17,7 @@ implement drop down in side nav bar - not a priority
 -->implement delete in datatable - completed
 implement add in datatable
 implement edit in datatable
+implement addition of an extra column in datatable at the server side 
 -->implement filter in datatable - completed
 implement radiobutton filter in datatable
 -->implement pagination in flask - completed
@@ -27,5 +28,5 @@ handle database exceptions
 learn about flask migrate
 -->learn to manage blueprints - completed
 learn to upload data while sending email
-select,group by, and, or, joins, like, etc in sqlalachemy
+select,group by, and, or, joins, like, multiply, addition while selecting, etc. in sqlalachemy
 
