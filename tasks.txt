@@ -28,6 +28,7 @@ learn about flask admin
 handle database exceptions
 learn about flask migrate
 -->learn to manage blueprints - completed
+implement blueprints at project level sub-directories __init__.py
 learn to upload data while sending email
 select,group by, and, or, joins, like, multiply, addition while selecting, etc. in sqlalachemy
 
