@@ -17,7 +17,8 @@ implement drop down in side nav bar - not a priority
 -->implement delete in datatable - completed
 implement add in datatable
 implement edit in datatable
-implement addition of an extra column in datatable at the server side 
+-->implement addition of an extra column in datatable at the server side - completed 
+implement group by, count queries on server side and display them in datatable
 -->implement filter in datatable - completed
 implement radiobutton filter in datatable
 -->implement pagination in flask - completed
