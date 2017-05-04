@@ -21,7 +21,8 @@ implement edit in datatable
 implement group by, count queries on server side and display them in datatable
 -->implement filter in datatable - completed
 implement radiobutton filter in datatable
--->implement pagination in flask - completed
+-->implement pagination jquery in flask - completed
+implement pagination using flask functionality
 -->cant set environment variables in mac - completed
 learn callback functions
 learn about flask admin
