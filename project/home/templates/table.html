@@ -72,6 +72,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <h3> USER DATA </h3>
 	                        <table id="example" class="display" cellspacing="0" width="100%">
                                 <thead>
                                   <tr>
@@ -83,6 +84,20 @@
                                 </thead>
                                 <tbody></tbody>
                               </table>
+                            <br>
+                            <h3> USER INCOME AND COUNT </h3>
+                            <table id="example1" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Income</th>
+                                      <th>Count</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                              </table>
+
+
 	                    </div>
 	                </div>
 	            </div>
@@ -144,6 +159,8 @@
                         });
                     });
 
+
+
                     $('#min, #max').keyup( function() {
 
                         var min = parseInt( $('#min').val());
@@ -159,6 +176,17 @@
                         //alert("{{ url_for('home.filter_id') }}");
                         table.ajax.url("{{ url_for('home.filter_id') }}?min="+min+"&max="+max).load();
 
+                    });
+
+                    var table1 = $('#example1').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": "{{ url_for('home.aggregate') }}",
+                        "columns":[
+                            { data: "0" },
+                            { data: "1" },
+                            { data: "2" }
+                        ]
                     });
 
                 });

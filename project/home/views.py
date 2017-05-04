@@ -4,9 +4,10 @@ from flask import render_template, Blueprint  # pragma: no cover
 from flask.ext.login import login_required, current_user  # pragma: no cover
 from flask import request
 from datatables import ColumnDT, DataTables
-from project.models.users import User
+from project.models.users import User, Timepass
+from sqlalchemy import func
 from flask import jsonify
-from project import db  # pragma: no cover
+from project import session  # pragma: no cover
 
 # from project.models import BlogPost   # pragma: no cover
 
@@ -44,7 +45,7 @@ def icons():
 
 @home_blueprint.route('/ajax')
 def ajax():
-    users = User.query.all()
+    users = session.query(User).all()
     list_of_users = []
     for user in users:
         data = dict()
@@ -68,7 +69,7 @@ def data():
     ]
 
     # defining the initial query depending on your purpose
-    query = User.query.with_entities(User.id, User.username, User.email)
+    query = session.query(User).with_entities(User.id, User.username, User.email)
 
     print(query)
     # GET parameters
@@ -81,12 +82,29 @@ def data():
     return jsonify(rowTable.output_result())
 
 
+@home_blueprint.route('/aggregate')
+def aggregate():
+    columns = [
+        ColumnDT(Timepass.user_name),
+        ColumnDT(func.sum(Timepass.income).label('Sum'), global_search=False),
+        ColumnDT(func.count(Timepass.user_name).label('Count'), global_search=False)
+    ]
+    query = session.query(Timepass.user_name, func.sum(Timepass.income).label('Sum'),
+                          func.count(Timepass.user_name).label('Count')).group_by(Timepass.user_name)
+
+    params = request.args.to_dict()
+
+    rowTable = DataTables(params, query, columns)
+
+    return jsonify(rowTable.output_result())
+
+
 @home_blueprint.route('/datatable_delete')
 def delete():
     user_id = request.args['id']
-    user = User.query.filter_by(id=user_id).first()
-    db.session.delete(user)
-    db.session.commit()
+    user = session.query(User).filter_by(id=user_id).first()
+    session.delete(user)
+    session.commit()
     return json.dumps({"res": "True"})
 
 
@@ -106,7 +124,7 @@ def filter_id():
 
     # defining the initial query depending on your purpose
     # query = User.query.with_entities(User.id, User.username, User.email).filter(User.id >= min_val).filter(User.id <= max_val))
-    query = db.session.query(User.id,User.username,User.email).filter(User.id >= min_val, User.id <= max_val)
+    query = session.query(User.id, User.username, User.email).filter(User.id >= min_val, User.id <= max_val)
     print(query)
     # GET parameters
     params = request.args.to_dict()

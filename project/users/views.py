@@ -3,7 +3,7 @@ from flask.ext.login import login_user, \
     login_required, logout_user  # pragma: no cover
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request
-from project import db
+from project import session
 from project.models.users import User
 from project.users.login_form import LoginForm
 from project.users.register_form import RegisterForm
@@ -23,7 +23,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = session.query(User).filter_by(username=form.username.data).first()
         if user:
             if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
@@ -48,8 +48,8 @@ def signup():
         #check if user with same id exists
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(email=form.email.data, username=form.username.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
+        session.add(new_user)
+        session.commit()
 
         return redirect(url_for('.login'))
         # return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
