@@ -1,5 +1,5 @@
 from flask import redirect, render_template, url_for, Blueprint  # pragma: no cover
-from flask.ext.login import login_user, \
+from flask_login import login_user, \
     login_required, logout_user  # pragma: no cover
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request
@@ -10,16 +10,16 @@ from project.users.register_form import RegisterForm
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates', static_folder='static')
 
-#user = None
+
+# user = None
 @user_blueprint.route('/')
 def index():
-
     return redirect(url_for('.login'))
 
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    #global user
+    # global user
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -45,7 +45,7 @@ def signup():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        #check if user with same id exists
+        # check if user with same id exists
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(email=form.email.data, username=form.username.data, password=hashed_password)
         session.add(new_user)

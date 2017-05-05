@@ -1,7 +1,7 @@
 import json
 
 from flask import render_template, Blueprint  # pragma: no cover
-from flask.ext.login import login_required, current_user  # pragma: no cover
+from flask_login import login_required, current_user  # pragma: no cover
 from flask import request
 from datatables import ColumnDT, DataTables
 from project.models.users import User, Timepass
