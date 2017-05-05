@@ -1,5 +1,4 @@
-from project import Base, metadata
-
+from database import Base, metadata
 # from project import bcrypt
 import json
 from sqlalchemy import Table, MetaData, Column, Integer, String, select, func

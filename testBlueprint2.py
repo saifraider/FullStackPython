@@ -1,7 +1,8 @@
 from project import create_app
 from flask_script import Manager
 
-app = create_app('development')
+config_name = 'development'
+app = create_app(config_name)
 
 manager = Manager(app)
 

@@ -3,10 +3,11 @@ from flask_login import login_user, \
     login_required, logout_user  # pragma: no cover
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request
-from project import session
+from database import session, Session
 from project.models.users import User
 from project.users.login_form import LoginForm
 from project.users.register_form import RegisterForm
+from sqlalchemy import event
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates', static_folder='static')
 
@@ -62,3 +63,8 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('.login'))
+
+
+'''@event.listens_for(Session, 'after_commit')
+def receive_after_commit(session):
+    print("Hi new user created")'''

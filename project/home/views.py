@@ -7,7 +7,7 @@ from datatables import ColumnDT, DataTables
 from project.models.users import User, Timepass
 from sqlalchemy import func
 from flask import jsonify
-from project import session  # pragma: no cover
+from database import session  # pragma: no cover
 
 # from project.models import BlogPost   # pragma: no cover
 
