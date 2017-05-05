@@ -65,6 +65,6 @@ def logout():
     return redirect(url_for('.login'))
 
 
-'''@event.listens_for(Session, 'after_commit')
+@event.listens_for(Session, 'after_commit')
 def receive_after_commit(session):
-    print("Hi new user created")'''
+    print("Hi new user created")
