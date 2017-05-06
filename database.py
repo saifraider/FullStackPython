@@ -18,11 +18,11 @@ def init_db(uri):
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    from project.models.users import User, Timepass
+    from project.models.user import User
+    from project.models.timepass import Timepass
 
     Base.metadata.create_all(bind=engine)
 
-    return session
 
 
 

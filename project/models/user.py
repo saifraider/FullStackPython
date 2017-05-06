@@ -1,18 +1,15 @@
-from database import Base, metadata
 # from project import bcrypt
-import json
-from sqlalchemy import Table, MetaData, Column, Integer, String, select, func
+from project import db
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.hybrid import hybrid_property
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(15), unique=True)
-    email = Column(String(50), unique=True)
-    password = Column(String(80))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(15), unique=True)
+    email = db.Column(db.String(50), unique=True)
+    password = db.Column(db.String(80))
 
     def __init__(self, username, email, password):
         self.username = username
@@ -33,11 +30,6 @@ class User(Base):
 
     def __repr__(self):
         return '<name - {}>'.format(self.username)
-
-
-class Timepass(Base):
-    __table__ = Table('timepass', metadata, autoload=True)
-
 
 
 '''

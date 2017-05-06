@@ -4,7 +4,7 @@ from flask_login import login_user, \
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request
 from database import session, Session
-from project.models.users import User
+from project.models.user import User
 from project.users.login_form import LoginForm
 from project.users.register_form import RegisterForm
 from sqlalchemy import event
@@ -65,6 +65,6 @@ def logout():
     return redirect(url_for('.login'))
 
 
-@event.listens_for(Session, 'after_commit')
+'''@event.listens_for(Session, 'after_commit')
 def receive_after_commit(session):
-    print("Hi new user created")
+    print("Hi new user created")'''
