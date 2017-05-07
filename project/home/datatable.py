@@ -21,6 +21,15 @@ def data():
 
     query = session.query(User.id, User.username, User.email)
 
+    '''
+    join_obj = session.query(User).join(Timepass, Timepass.timepass_id == User.id)
+
+    result_set = join_obj.with_entities(User.id, Timepass.timepass_id, User.username, Timepass.user_name, Timepass.income).all()
+
+    for i in result_set:
+        print i._asdict()
+        print(str(i.id)+'-'+str(i.income)+'-'+i.user_name+'-'+i.username) '''
+
     params = request.args.to_dict()
 
     rowTable = DataTables(params, query, columns)
